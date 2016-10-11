@@ -4,7 +4,10 @@ A test app using **EntityFrameworkCore** + **SqlLocalDb** + **XUnit**
 ## Pre requisits
 * [.Net Core SDK](https://www.microsoft.com/net/core#windows)
 * **SqlLocalDb** installed 
-* **MsSqlLocalDb** instance created on your **SqlLocalDb**
+* **MsSqlLocalDb** instance created and started on your **SqlLocalDb**
+  * To list instances use: ``sqllocaldb info``
+  * To create instances use: ``sqllocaldb create MsSqlLocalDb``
+  * To start instances use: ``sqllocaldb start MsSqlLocalDb``
 
 ## Setup the Enviroment
 1. Open your prompt command line tool
