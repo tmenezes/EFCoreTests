@@ -15,7 +15,6 @@ namespace EFCore.Repository
         public AppDbContext(DbContextOptions dbContextOptions)
             : base(dbContextOptions)
         {
-
         }
 
 

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using EFCore.Domain;
 using EFCore.Repository;
+using EFCore.Repository.Infra;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Xunit;
 
 namespace EFCore.Test
@@ -14,17 +18,23 @@ namespace EFCore.Test
 
         public DatabaseTests()
         {
-            customer = new Customer()
+            customer = new Customer
             {
                 Name = $"Customer-{DateTime.Now}",
                 RegisterDate = DateTime.Now,
-                Addresses = new List<Address>()
+                Addresses = new List<Address>
                 {
-                    new Address() { AddressType = AddressType.Home, Street = "1st Street" },
+                    new Address { AddressType = AddressType.Home, Street = "1st Street" }
                 }
             };
 
-            customerRepository = new CustomerRepository(new AppDbContext());
+            var appDbContext = new AppDbContext();
+            customerRepository = new CustomerRepository(appDbContext);
+
+            // setup the logger
+            var serviceProvider = appDbContext.GetInfrastructure();
+            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+            loggerFactory.AddProvider(new MyLoggerProvider());
         }
 
 
@@ -90,7 +100,7 @@ namespace EFCore.Test
         [Fact]
         public void Add_customer_with_two_addresses()
         {
-            var newAddress = new Address() { AddressType = AddressType.Work, Street = "2nd Avenue" };
+            var newAddress = new Address { AddressType = AddressType.Work, Street = "2nd Avenue" };
             customer.Addresses.Add(newAddress);
 
             customer.Name = $"Customer-{nameof(Add_customer_with_two_addresses)}";

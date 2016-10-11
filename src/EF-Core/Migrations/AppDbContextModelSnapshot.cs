@@ -1,14 +1,13 @@
 ﻿using System;
+using EFCore.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using EFCore.Repository;
 
 namespace EFCore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    class AppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -17,43 +16,43 @@ namespace EFCore.Migrations
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("EFCore.Domain.Address", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+            {
+                b.Property<int>("Id")
+                 .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AddressType");
+                b.Property<int>("AddressType");
 
-                    b.Property<int?>("CustomerId");
+                b.Property<int?>("CustomerId");
 
-                    b.Property<string>("Street");
+                b.Property<string>("Street");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                b.HasIndex("CustomerId");
 
-                    b.ToTable("Address");
-                });
+                b.ToTable("Address");
+            });
 
             modelBuilder.Entity("EFCore.Domain.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+            {
+                b.Property<int>("Id")
+                 .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Name");
+                b.Property<string>("Name");
 
-                    b.Property<DateTime>("RegisterDate");
+                b.Property<DateTime>("RegisterDate");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Customers");
-                });
+                b.ToTable("Customers");
+            });
 
             modelBuilder.Entity("EFCore.Domain.Address", b =>
-                {
-                    b.HasOne("EFCore.Domain.Customer")
-                        .WithMany("Addresses")
-                        .HasForeignKey("CustomerId");
-                });
+            {
+                b.HasOne("EFCore.Domain.Customer")
+                 .WithMany("Addresses")
+                 .HasForeignKey("CustomerId");
+            });
         }
     }
 }
