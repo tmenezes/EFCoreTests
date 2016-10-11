@@ -37,9 +37,10 @@ namespace EFCore.Repository
             return _appDbContext.SaveChanges();
         }
 
-        public void Delete(Customer customer)
+        public int Delete(Customer customer)
         {
-
+            _appDbContext.Remove(customer);
+            return _appDbContext.SaveChanges();
         }
     }
 }

@@ -123,5 +123,18 @@ namespace EFCore.Test
             Assert.NotNull(updatedCustomer);
             Assert.Equal(newName, updatedCustomer.Name);
         }
+
+
+        // delete scenarios
+        [Fact]
+        public void Delete_single_customer()
+        {
+            Add_single_customer();
+
+            customerRepository.Delete(customer);
+            var deletedCustomer = customerRepository.GetById(customer.Id);
+
+            Assert.Null(deletedCustomer);
+        }
     }
 }

@@ -9,6 +9,6 @@ namespace EFCore.Repository
         Customer GetById(int id);
         void Add(Customer customer);
         int Update(Customer customer);
-        void Delete(Customer customer);
+        int Delete(Customer customer);
     }
 }
